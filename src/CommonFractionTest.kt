@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class CommonFractionKtTest {
+class CommonFractionTest {
     @Test
     fun `test toString`() {
         val expected = "1 / 3"
