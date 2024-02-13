@@ -1,12 +1,12 @@
 import kotlin.math.abs        /*модуль*/
 
-class Fraction(private var numerator: Int, private var denominator: Int = 1) {
+data class CommonFraction(private var numerator: Int, private var denominator: Int = 1) {
     init {
         try {                                           /*Проверка деления на 0*/
             numerator / denominator
         }
         catch (e:Exception) {                                  /*Обработка исключения*/
-            println("Знаменатель не может быть равен 0")
+            println("Denominator can't be 0")
         }
         privateNodFinder()
     }
@@ -34,49 +34,50 @@ class Fraction(private var numerator: Int, private var denominator: Int = 1) {
         }
     }
 
-    operator fun plus(other: Fraction): Fraction {     /*сложение чисел если второе экземпляр является объектом класса Дробь*/
+    fun plus(other: CommonFraction): CommonFraction {     /*сложение чисел если второе экземпляр является объектом класса Дробь*/
         val a = numerator
         val b = denominator
         val c = other.numerator
         val d = other.denominator
-        return Fraction(a * d + b * c, b * d)
+        return CommonFraction(a * d + b * c, b * d)
     }
 
-    operator fun plus(other: Int): Fraction {       /*если второй экземпляр - это число*/
-        return this + Fraction(other)
+    fun plus(other: Int): CommonFraction {       /*если второй экземпляр - это число*/
+        return this.plus(CommonFraction(other))
     }
 
-    operator fun minus(other: Fraction): Fraction {   /*метод вычитания*/
+    fun minus(other: CommonFraction): CommonFraction {   /*метод вычитания*/
         val a = numerator
         val b = denominator
         val c = other.numerator
         val d = other.denominator
-        return Fraction(a * d - b * c, b * d)
+        return CommonFraction(a * d - b * c, b * d)
     }
 
-    operator fun times(other: Fraction): Fraction {    /*метод умножения*/
+    fun multiply(other: CommonFraction): CommonFraction {    /*метод умножения*/
         val a = numerator
         val b = denominator
         val c = other.numerator
         val d = other.denominator
-        return Fraction(a * c, b * d)
+        return CommonFraction(a * c, b * d)
     }
 
-    operator fun div(other: Fraction): Fraction {    /*метод деления*/
+    fun divide(other: CommonFraction): CommonFraction {    /*метод деления*/
         val a = numerator
         val b = denominator
         val c = other.numerator
         val d = other.denominator
-        return Fraction(a * d, b * c)
+        return CommonFraction(a * d, b * c)
     }
 
     override fun toString(): String {     /*переопределяет строковое представление об объекте*/
-        return "$numerator/$denominator"
+        return "$numerator / $denominator"
     }
 }
 
+/*
 fun main() {
-    val a = Fraction(2, -3)
+    val a = Fraction(2, 0)
     val b = Fraction(4, 5)
     println("a = $a")
     println("b = $b")
@@ -87,3 +88,5 @@ fun main() {
     println()
     println("a // b = ${a / b}")
 }
+
+ */
