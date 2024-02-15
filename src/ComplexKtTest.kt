@@ -107,7 +107,7 @@ class CommonFractionKtTest {
             numerator = 5.0,
             denominator = 37.0
         )
-        val actual: Complex = firstComplex.multiply(secondFraction)
+        val actual: Complex = firstComplex.times(secondFraction)
         assertEquals(expected, actual)
 
     }
@@ -124,7 +124,7 @@ class CommonFractionKtTest {
             denominator = 2000000000.0
         )
 
-        firstComplex.multiply(secondFraction)
+        firstComplex.times(secondFraction)
 
     }
 

@@ -43,25 +43,19 @@ data class Complex(var numerator: Double, var denominator: Double) {
             return "${numerator.toInt()} - i${-denominator.toInt()}"
         }
     }
-
-    fun multiply(other: Complex): Complex {
-        val newnumerator = this.numerator * other.numerator - this.denominator * other.denominator
-        val newdenominator = other.numerator * this.denominator + this.numerator * other.denominator
-        return Complex(newnumerator, newdenominator)
-    }
 }
 
-fun main() {
-    println(Int.MAX_VALUE)
-    val first = Complex(1200.0, 3.0)
-    val second = Complex(4.0, 5.0)
-    println("a = $first")
-    println("b = $second")
-    println("a + b = ${first + second}")
-    println("a - b = ${first - second}")
-    println("a * b = ${first * second}")
-    println("a / b = ${first / second}")
-    println(first)
-    println(second)
-}
+//fun main() {
+//    println(Int.MAX_VALUE)
+//    val first = Complex(5.0, 3.0)
+//    val second = Complex(4.0, 5.0)
+//    println("a = $first")
+//    println("b = $second")
+//    println("a + b = ${first + second}")
+//    println("a - b = ${first - second}")
+//    println("a * b = ${first * second}")
+//    println("a / b = ${first / second}")
+//    println(first)
+//    println(second)
+//}
 
