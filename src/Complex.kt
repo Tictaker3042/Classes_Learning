@@ -1,6 +1,4 @@
-import kotlin.math.pow
-
-data class Complex(private var numerator: Double, private var denominator: Double) {
+data class Complex(var numerator: Double, var denominator: Double) {
     init {
         if (numerator.toInt() >= Int.MAX_VALUE || denominator.toInt() >= Int.MAX_VALUE) {
             throw IllegalStateException("Значение превысило диапазон Int")}
@@ -27,18 +25,23 @@ data class Complex(private var numerator: Double, private var denominator: Doubl
     }
 
     operator fun div(other: Complex): Complex {
-        val newnumerator = -((this.numerator*other.numerator + this.denominator*other.denominator)/(other.numerator.pow(2) + other.denominator.pow(2)))
-        val newdenominator = ((other.numerator*this.denominator - this.numerator*other.denominator)/(other.numerator.pow(2) + other.denominator.pow(2)))
+        val newnumerator = -((this.numerator*other.numerator + this.denominator*other.denominator)/
+                (other.numerator * other.numerator + other.denominator * other.denominator))
+        val newdenominator = ((other.numerator*this.denominator - this.numerator*other.denominator)/
+                (other.numerator * other.numerator + other.denominator * other.denominator))
         if (newnumerator < 0 && newdenominator < 0) {
             return Complex(-newnumerator, -newdenominator)}
         else {
             return Complex(newnumerator, newdenominator)
         }
-
     }
 
     override fun toString(): String {     /*переопределяет строковое представление об объекте*/
-        return "${numerator.toInt()} + i${denominator.toInt()}"
+        if (denominator >= 0) {
+            return "${numerator.toInt()} + i${denominator.toInt()}"
+        } else {
+            return "${numerator.toInt()} - i${-denominator.toInt()}"
+        }
     }
 
     fun multiply(other: Complex): Complex {
@@ -50,13 +53,15 @@ data class Complex(private var numerator: Double, private var denominator: Doubl
 
 fun main() {
     println(Int.MAX_VALUE)
-    val first = Complex(2000000000.0, 2000000000.0)
-    val second = Complex(2000000000.0, 2000000000.0)
+    val first = Complex(1200.0, 3.0)
+    val second = Complex(4.0, 5.0)
     println("a = $first")
     println("b = $second")
     println("a + b = ${first + second}")
     println("a - b = ${first - second}")
     println("a * b = ${first * second}")
     println("a / b = ${first / second}")
+    println(first)
+    println(second)
 }
 
