@@ -1,42 +1,53 @@
 import kotlin.math.pow
 
-data class Complex(private var real: Double, private var imaginary: Double) {
+data class Complex(private var numerator: Double, private var denominator: Double) {
     init {
 
     }
 
     operator fun plus(other: Complex): Complex {
-        val newReal = this.real + other.real
-        val imaginary = this.imaginary + other.imaginary
-        return Complex(newReal, imaginary)
+        val newnumerator = this.numerator + other.numerator
+        val denominator = this.denominator + other.denominator
+        return Complex(newnumerator, denominator)
     }
 
     operator fun minus(other: Complex): Complex {
-        val newReal = this.real - other.real
-        val newImaginary = this.imaginary - other.imaginary
-        return Complex(newReal, newImaginary)
+        val newnumerator = this.numerator - other.numerator
+        val newdenominator = this.denominator - other.denominator
+        return Complex(newnumerator, newdenominator)
     }
 
     operator fun times(other: Complex): Complex {
-        val newReal = this.real * other.real - this.imaginary * other.imaginary
-        val newImaginary = other.real * this.imaginary + this.real * other.imaginary
-        return Complex(newReal, newImaginary)
+        val newnumerator = this.numerator * other.numerator - this.denominator * other.denominator
+        val newdenominator = other.numerator * this.denominator + this.numerator * other.denominator
+        return Complex(newnumerator, newdenominator)
     }
 
     operator fun div(other: Complex): Complex {
-        val newReal = -((this.real*other.real + this.imaginary*other.imaginary)/(other.real.pow(2) + other.imaginary.pow(2)))
-        val newImaginary = ((other.real*this.imaginary - this.real*other.imaginary)/(other.real.pow(2) + other.imaginary.pow(2)))
-        return Complex(newReal, newImaginary)
+        val newnumerator = -((this.numerator*other.numerator + this.denominator*other.denominator)/(other.numerator.pow(2) + other.denominator.pow(2)))
+        val newdenominator = ((other.numerator*this.denominator - this.numerator*other.denominator)/(other.numerator.pow(2) + other.denominator.pow(2)))
+        if (newnumerator < 0 && newdenominator < 0) {
+            return Complex(-newnumerator, -newdenominator)
+        } else {
+            return Complex(newnumerator, newdenominator)
+        }
+
     }
 
     override fun toString(): String {     /*переопределяет строковое представление об объекте*/
-        return "$real + $imaginary"
+        return "${numerator.toInt()} + i${denominator.toInt()}"
+    }
+
+    fun multiply(other: Complex): Complex {
+        val newnumerator = this.numerator * other.numerator - this.denominator * other.denominator
+        val newdenominator = other.numerator * this.denominator + this.numerator * other.denominator
+        return Complex(newnumerator, newdenominator)
     }
 }
 
 fun main() {
-    val first = Complex(1.0, 3.0)
-    val second = Complex(1.0, 4.0)
+    val first = Complex(2000000000.0, 2000000000.0)
+    val second = Complex(2000000000.0, 2000000000.0)
     println("a = $first")
     println("b = $second")
     println("a + b = ${first + second}")
