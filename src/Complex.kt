@@ -1,3 +1,5 @@
+import kotlin.math.abs
+
 data class Complex(var numerator: Double, var denominator: Double) {
     init {
         if (numerator.toInt() >= Int.MAX_VALUE || denominator.toInt() >= Int.MAX_VALUE) {
@@ -43,6 +45,27 @@ data class Complex(var numerator: Double, var denominator: Double) {
             return "${numerator.toInt()} - i${-denominator.toInt()}"
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Complex
+        val epsilon = 0.00001
+
+        if (abs(numerator - other.numerator) > epsilon) return false
+        if (abs(denominator - other.denominator) > epsilon) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = numerator.hashCode()
+        result = 31 * result + denominator.hashCode()
+        return result
+    }
+
+
 }
 
 //fun main() {
